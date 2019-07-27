@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pictures</title>
+</head>
+<body>
+    <ul> 
+        
+        {% for picture in pictures %}
+            <li style="list-style: none; "> 
+                <p>{{picture.title}} by: {{picture.artist}}</p>
+                <img src="{{ picture.url }}" alt="{{ picture.title}}" > 
+                    
+                    {%for comment in comments %}
+                    {% if picture.id == comment.id %}
+                    
+                    <p>Comments: {{picture.comments.count}}</p>
+                    <li>{{comment.message}}</li>
+                    {% endif %}
+                    {% endfor %}
+                        
+        {% endfor %} 
+            </li>
+       
+    </ul>
+</body>
+</html>
