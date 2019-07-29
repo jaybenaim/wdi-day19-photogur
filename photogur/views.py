@@ -19,11 +19,8 @@ def root(request):
 
 def picture_show(request, id): 
     picture = Picture.objects.get(pk=id) 
-    comment = Comment.objects.filter(picture__pk=id)
     context = {
-        'picture': picture, 
-        'comments': comment,
-
+        'picture': picture
     }
     return render(request, 'picture.html', context) 
 

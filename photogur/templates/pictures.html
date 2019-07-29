@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
+    <ul> 
         {% for picture in pictures %}
+
             <li style="list-style: none; "> 
-                <h1>{{picture.title}} </h1> 
-                <h2>By: {{picture.artist}}</h2>
+                
+                
                 <a href="{% url 'picture_details' id=picture.pk %}">
-                    <img src="{{ picture.url }}" alt="{{ picture.title}}" > 
+                    <div class="border"> 
+                    <img src="{{picture.url}}" alt="{{picture.title}}" > 
+                    <h2>{{picture.title}} By: {{picture.artist}}</h2> 
+                    </div> 
                 </a>
-                {%for comment in comments %}
-                    {% if picture.id == comment.id %}
-                        <p>Comments: {{picture.comments.count}}</p>
-                    {% endif %}
-                    {% endfor %}
+                    <p>Comments: {{picture.comments.count}}</p>
+                
         {% endfor %} 
             </li>
+    </ul> 
 {% endblock %}

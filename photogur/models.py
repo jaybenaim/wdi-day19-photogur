@@ -18,7 +18,7 @@ class Comment(models.Model):
     picture = models.ForeignKey(Picture, on_delete=models.CASCADE, related_name='comments')
 
     def __str__(self): 
-        return f'{self.name}'
+        return f'{self.message}'
 
     # def __str__(self): 
     #     return f'{self.message}'
