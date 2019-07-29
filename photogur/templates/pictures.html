@@ -2,7 +2,8 @@
 {% block content %}
         {% for picture in pictures %}
             <li style="list-style: none; "> 
-                <h1>{{picture.title}} by: {{picture.artist}}</h1>
+                <h1>{{picture.title}} </h1> 
+                <h2>By: {{picture.artist}}</h2>
                 <a href="{% url 'picture_details' id=picture.pk %}">
                     <img src="{{ picture.url }}" alt="{{ picture.title}}" > 
                 </a>
