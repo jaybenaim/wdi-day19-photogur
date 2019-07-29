@@ -7,9 +7,8 @@ class Picture(models.Model):
     artist = models.CharField(max_length=225) 
     url = models.CharField(max_length=225)
     
-
-    # def __str__(self): 
-    #     return f'{self.title} {self.artist}'
+    def __str__(self): 
+        return f'{self.title}'
 
 
 class Comment(models.Model): 
@@ -18,6 +17,8 @@ class Comment(models.Model):
     message = models.TextField() 
     picture = models.ForeignKey(Picture, on_delete=models.CASCADE, related_name='comments')
 
+    def __str__(self): 
+        return f'{self.name}'
 
     # def __str__(self): 
     #     return f'{self.message}'

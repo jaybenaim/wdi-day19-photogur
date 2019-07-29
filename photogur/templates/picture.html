@@ -1,0 +1,17 @@
+
+{% extends 'base.html' %}
+{% block title %}
+    {{ picture.title }}
+{% endblock %}
+{% block content %}
+    <h1>{{picture.title}}</h1>
+    <h2>By {{picture.artist}}</h2>
+
+    <img src="{{picture.url}}" alt="{{picture.title}}" /> 
+    <ul> 
+        {% for comment in comments %}
+            <li style='margin-left: 40px'>{{comment}}</li>
+        {% endfor %}
+    </ul> 
+
+{% endblock %}
