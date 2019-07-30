@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1> Results </h1> 
+    <div class='pic-container'> 
+        
+        <ul> 
+            <div class='pic'> 
+                <img src="{{picture.url}}" alt="{{picture.title}}" />
+                    {% comment %} <h2>{{picture.title}} By {{picture.artist}}</h2>
+                    <p> Comments: {{picture.comments.count}}</p>
+                    {% for comment in picture.comments.all %}
+                        <li id="comment1" > {{comment}}</li>
+                    {% endfor %} {% endcomment %}
+            </div> 
+        </ul> 
+    </div>
+
+{% endblock %}

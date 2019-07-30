@@ -22,4 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('pictures/', pictures), 
     path('pictures/<int:id>', picture_show, name='picture_details'), 
+    path('search', picture_search, name="picture_search")
+    
 ]
