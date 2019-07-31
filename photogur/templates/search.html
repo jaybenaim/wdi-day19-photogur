@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <h1> Results </h1> 
+    <h1 class="search-page-title" > Results </h1> 
     <div class='pic-container'> 
         
-        <ul> 
-            <div class='pic'> 
-                <img src="{{picture.url}}" alt="{{picture.title}}" />
-                    {% comment %} <h2>{{picture.title}} By {{picture.artist}}</h2>
-                    <p> Comments: {{picture.comments.count}}</p>
-                    {% for comment in picture.comments.all %}
-                        <li id="comment1" > {{comment}}</li>
-                    {% endfor %} {% endcomment %}
-            </div> 
+        <ul class='pic' > 
+            
+        
+            {% for pic in picture %}
+            <a href="{% url 'picture_details' id=pic.pk %}"> 
+                <p class='search-page'> {{pic.title }} </p> 
+                <p class='search-page'> By: {{pic.artist}} </p> 
+                <img src="{{pic.url}}" alt="{{pic.title}}" />
+            </a> 
+            {% endfor %}
+            
         </ul> 
     </div>
 

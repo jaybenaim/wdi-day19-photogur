@@ -17,6 +17,16 @@ nav a:hover {
     display: block; 
     width: 50%; 
 }
+.form { 
+    display: block; 
+    width: 100%; 
+    text-align: center; 
+    margin-top: 20px; 
+     
+    
+
+
+}
 ul { 
     display: grid; 
     grid-template-columns: 1fr 1fr 1fr; 
@@ -70,6 +80,22 @@ footer {
     padding-bottom: 10px; 
 }
 
+.search-page { 
+    color: gray; 
+    text-decoration: none; 
+    
+}
+.search-page-title { 
+    margin-left: 20px; 
+    font-size: 2em; 
+    margin-bottom: 0; 
+    padding-bottom: 0; 
+    text-align: center; 
+    color: gray; 
+}
+.pic-container { 
+    padding: 0 40px; 
+}
 @media (min-width: 994px) { 
     .pic p , h2 { 
         font-size: 2em; 
