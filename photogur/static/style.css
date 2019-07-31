@@ -96,13 +96,17 @@ footer {
 .pic-container { 
     padding: 0 40px; 
 }
+.comment-time { 
+    height: 10px; 
+} 
+.comment-form { 
+    display: block; 
+    width: 100%; 
+    text-align: center; 
+}
 @media (min-width: 994px) { 
     .pic p , h2 { 
         font-size: 2em; 
-    }
-    img {
-        padding-left: 15%; 
-        padding-right: 15%; 
     }
 }
 /* tablet */ 

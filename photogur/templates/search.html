@@ -6,13 +6,12 @@
         
         <ul class='pic' > 
             
-        
             {% for pic in picture %}
-            <a href="{% url 'picture_details' id=pic.pk %}"> 
-                <p class='search-page'> {{pic.title }} </p> 
-                <p class='search-page'> By: {{pic.artist}} </p> 
-                <img src="{{pic.url}}" alt="{{pic.title}}" />
-            </a> 
+                <a href="{% url 'picture_details' id=pic.pk %}"> 
+                    <p class='search-page'> {{pic.title }} </p> 
+                    <p class='search-page'> By: {{pic.artist}} </p> 
+                    <img src="{{pic.url}}" alt="{{pic.title}}" />
+                </a> 
             {% endfor %}
             
         </ul> 
