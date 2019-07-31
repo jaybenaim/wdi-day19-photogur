@@ -3,14 +3,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from photogur.models import * 
 from django.contrib.postgres.search import SearchVector
-
+from django.shortcuts import redirect
 
 
 def pictures(request): 
     context = { 
         'pictures': Picture.objects.all(), 
-        'comments': Comment.objects.all(),
-        'comment_2': Comment.objects.get(pk=2) 
+        'comments': Comment.objects.all()
     }
     response = render(request, 'pictures.html', context)
     return HttpResponse(response) 
@@ -47,7 +46,13 @@ def create_comment(request):
     comment.save()
    
     return HttpResponseRedirect(f'/pictures/{picture_id}')
-    # return render(request, 'picture.html', context)
+
+def delete(request, id): 
+    comment = Comment.objects.get(pk=id) 
+    comment.delete() 
+    
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 
     

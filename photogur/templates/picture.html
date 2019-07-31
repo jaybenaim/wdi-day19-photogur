@@ -13,7 +13,10 @@
                     <h2>{{picture.title}} By {{picture.artist}}</h2>
                     <p> Comments: {{picture.comments.count}}</p>
                     {% for comment in picture.comments.all %}
-                        <li id="comment1" > {{comment}}  <br>  <span class='comment-time'>{{comment.name}} | {{comment.created_at}} </span> <button>X</button> </li>
+                        <li id="comment1" > {{comment}}  <br>  <span class='comment-time'>{{comment.name}} | {{comment.created_at}} </span>
+                        
+                            <a href='/comments/{{comment.pk}}/delete' > X </a>
+                        </li>
                          
                     {% endfor %}
             </div> 
@@ -33,6 +36,6 @@
 
 
     
-        </form>
+    </form>
 
 {% endblock %}
