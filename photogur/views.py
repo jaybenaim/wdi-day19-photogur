@@ -51,7 +51,7 @@ def delete(request, id):
     comment = Comment.objects.get(pk=id) 
     comment.delete() 
     
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 
