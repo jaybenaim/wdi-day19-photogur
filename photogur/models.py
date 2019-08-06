@@ -21,4 +21,3 @@ class Comment(models.Model):
         return f'{self.message}'
 
   
-

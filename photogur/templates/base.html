@@ -13,7 +13,19 @@
     <header>
         <nav> 
             <a href="/"> <h1> Photogur </h1></a>
+            <ul>
+                {% if request.user.is_authenticated %}
+                    <li> Loggin in as {{ request.user.username }} </li> 
+                    <li><a href="{% url 'home' %}">All Pictures</a></li> 
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'signup' %}">Signup</a></li> 
+                    <li><a href="{% url 'login' %}">Login</a></li> 
+                {% endif %}
+            </ul> 
         </nav>  
+
+
         <form class="form" action="{% url 'picture_search' %}" method="get"> 
             <label for="picture-search"> 
                 <span>Search: </span> 

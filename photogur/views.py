@@ -1,9 +1,16 @@
 
 from django.http import HttpResponse, HttpResponseRedirect 
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from photogur.models import * 
 from django.contrib.postgres.search import SearchVector
-from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse
+
+
+def root(request): 
+    return HttpResponseRedirect('pictures/')
 
 
 def pictures(request): 
@@ -14,10 +21,7 @@ def pictures(request):
     response = render(request, 'pictures.html', context)
     return HttpResponse(response) 
 
-def root(request): 
-    return HttpResponseRedirect('pictures/')
-
-
+@login_required
 def picture_show(request, id): 
     picture = Picture.objects.get(pk=id) 
     context = {
@@ -25,7 +29,7 @@ def picture_show(request, id):
     }
     return render(request, 'picture.html', context) 
 
-    
+@login_required
 def picture_search(request): 
     query = request.GET['query']
     search_results = Picture.objects.filter(title__contains=query) or Picture.objects.filter(artist__contains=query) or Picture.objects.filter(url__contains=query)
@@ -33,6 +37,7 @@ def picture_search(request):
 
     return render(request, 'search.html', context)
 
+@login_required
 def create_comment(request): 
 
     params = request.POST
@@ -47,6 +52,7 @@ def create_comment(request):
    
     return HttpResponseRedirect(f'/pictures/{picture_id}')
 
+@login_required
 def delete(request, id): 
     comment = Comment.objects.get(pk=id) 
     comment.delete() 
@@ -55,4 +61,20 @@ def delete(request, id):
 
 
 
-    
+def signup(request): 
+    form = UserCreationForm() 
+    context = { 'form': form }
+    return render(request, 'registration/signup.html', context) 
+
+
+def signup_create(request): 
+    form = UserCreationForm(request.POST) 
+    if form.is_valid(): 
+        new_user = form.save() 
+        login(request, new_user) 
+        return redirect('/')
+
+    else: 
+        context = { 'form': form }
+        return render(request, 'registration/signup.html', context) 
+
