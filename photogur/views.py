@@ -9,21 +9,27 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
 
 
+
 def root(request): 
     return HttpResponseRedirect('pictures/')
 
 
-def pictures(request): 
-    context = { 
-        'pictures': Picture.objects.all(), 
-        'comments': Comment.objects.all()
-    }
-    response = render(request, 'pictures.html', context)
-    return HttpResponse(response) 
+def pictures(request):
+    if request.user.is_authenticated: 
+        context = { 
+            'pictures': Picture.objects.all(), 
+            'comments': Comment.objects.all()
+        }
+        response = render(request, 'pictures.html', context)
+        return HttpResponse(response) 
+    else: 
+        return redirect('/accounts/signup')
+
+
 
 @login_required
 def picture_show(request, id): 
-    picture = Picture.objects.get(pk=id) 
+    picture = get_object_or_404(Picture, pk=id) 
     context = {
         'picture': picture
     }
@@ -77,4 +83,22 @@ def signup_create(request):
     else: 
         context = { 'form': form }
         return render(request, 'registration/signup.html', context) 
+
+@login_required
+def edit_picture(request, id): 
+    picture = get_object_or_404(Picture, id=id)
+    if request.method == 'GET': 
+        form = PictureForm(instance=picture) 
+        context = { 'form': form, 'picture': picture}
+        return render(request, 'edit_picture.html', context)
+
+    elif request.method == 'POST': 
+        form = PictureForm(request.POST, instance=picture) 
+        if form.is_valid(): 
+            update_game = form.save() 
+            return redirect(reverse('picture_details', args=[picture.id]))
+        else: 
+            context = { 'form': form, 'picture': picture }
+            return render(request, 'edit_picture.html', context) 
+
 

@@ -1,4 +1,6 @@
 from django.db import models 
+from django import forms 
+from django.forms import ModelForm 
 
 
 
@@ -21,3 +23,8 @@ class Comment(models.Model):
         return f'{self.message}'
 
   
+class PictureForm(ModelForm): 
+    class Meta: 
+        model = Picture 
+        fields = ['title', 'artist', 'url']
+        

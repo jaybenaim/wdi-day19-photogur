@@ -11,6 +11,8 @@
             <div class='pic'> 
                 <img src="{{picture.url}}" alt="{{picture.title}}" />
                     <h2>{{picture.title}} By {{picture.artist}}</h2>
+                    
+                    <p> <a href="{% url 'edit_picture' picture.pk %}">Edit Post</a></p>
                     <p> Comments: {{picture.comments.count}}</p>
                     {% for comment in picture.comments.all %}
                         <li id="comment1" > {{comment}}  <br>  <span class='comment-time'>{{comment.name}} | {{comment.created_at}} </span>
