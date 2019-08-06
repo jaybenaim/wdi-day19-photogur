@@ -25,6 +25,13 @@ def pictures(request):
     else: 
         return redirect('/accounts/signup')
 
+def login_view(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/pictures')
+
+def signup(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/pictures')
 
 
 @login_required
