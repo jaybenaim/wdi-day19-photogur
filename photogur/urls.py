@@ -20,13 +20,13 @@ from photogur.views import *
 urlpatterns = [
     path('', root), 
     path('admin/', admin.site.urls),
+    path('accounts/signup', signup, name='signup'), 
+    path('accounts/signup_create', signup_create, name='signup_create'), 
+    path('accounts/profile/', include('django.contrib.auth.urls')), 
     path('pictures/', pictures, name="home"), 
     path('pictures/<int:id>', picture_show, name='picture_details'), 
     path('search', picture_search, name="picture_search"), 
     path('comments/new', create_comment, name='create_comment'), 
     path('comments/<int:id>/delete', delete), 
-    path('accounts/signup', signup, name='signup'), 
-    path('accounts/signup_create', signup_create, name='signup_create'), 
-    path('accounts/profile/', include('django.contrib.auth.urls')), 
     path('pictures/<int:id>/edit', edit_picture, name='edit_picture'), 
 ]

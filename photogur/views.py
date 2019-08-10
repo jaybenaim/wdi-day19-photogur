@@ -13,7 +13,6 @@ from django.urls import reverse
 def root(request): 
     return HttpResponseRedirect('pictures/')
 
-
 def pictures(request):
     if request.user.is_authenticated: 
         context = { 
@@ -37,12 +36,10 @@ def signup(request):
 @login_required
 def picture_show(request, id): 
     picture = get_object_or_404(Picture, pk=id) 
-    context = {
-        'picture': picture
-    }
+    context = {'picture': picture}
     return render(request, 'picture.html', context) 
 
-@login_required
+
 def picture_search(request): 
     query = request.GET['query']
     search_results = Picture.objects.filter(title__contains=query) or Picture.objects.filter(artist__contains=query) or Picture.objects.filter(url__contains=query)
@@ -52,7 +49,6 @@ def picture_search(request):
 
 @login_required
 def create_comment(request): 
-
     params = request.POST
     picture_id = params['picture']
     picture = Picture.objects.get(pk=picture_id) 
@@ -71,8 +67,6 @@ def delete(request, id):
     comment.delete() 
     
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
-
-
 
 def signup(request): 
     form = UserCreationForm() 
@@ -102,7 +96,7 @@ def edit_picture(request, id):
     elif request.method == 'POST': 
         form = PictureForm(request.POST, instance=picture) 
         if form.is_valid(): 
-            update_game = form.save() 
+            update_picture = form.save() 
             return redirect(reverse('picture_details', args=[picture.id]))
         else: 
             context = { 'form': form, 'picture': picture }
